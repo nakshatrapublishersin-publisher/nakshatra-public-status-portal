@@ -4,13 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#3E000B">
-
 <title>Submission Status | Nakshatra Publishers</title>
 
 <style>
 :root {
   --wine:#3E000B;
-  --wine2:#591522;
   --gold:#DF8921;
   --cream:#FEF0D7;
   --green:#168653;
@@ -43,7 +41,7 @@ body {
 }
 
 .header-inner {
-  max-width:850px;
+  max-width:800px;
   margin:auto;
   display:flex;
   align-items:center;
@@ -51,8 +49,8 @@ body {
 }
 
 .logo {
-  width:38px;
-  height:38px;
+  width:37px;
+  height:37px;
   border:1px solid var(--gold);
   border-radius:7px;
   display:grid;
@@ -74,14 +72,14 @@ body {
 }
 
 main {
-  max-width:760px;
+  max-width:720px;
   margin:auto;
-  padding:23px 14px 30px;
+  padding:22px 13px 28px;
 }
 
 .intro {
   text-align:center;
-  margin-bottom:17px;
+  margin-bottom:16px;
 }
 
 .eyebrow {
@@ -94,7 +92,7 @@ main {
 .intro h2 {
   font-family:Georgia,serif;
   color:var(--wine);
-  font-size:26px;
+  font-size:25px;
   margin:4px 0;
 }
 
@@ -182,28 +180,19 @@ button:disabled {
   display:none;
 }
 
-/* COMMON CARD HEADINGS */
+/* TIMELINE */
+
+.timeline-card {
+  padding:17px 13px;
+  overflow:hidden;
+}
 
 .card-heading {
   color:var(--wine);
   font-size:11px;
   font-weight:850;
   letter-spacing:.7px;
-  margin-bottom:14px;
-}
-
-.mini-label {
-  color:var(--muted);
-  font-size:9px;
-  font-weight:800;
-  letter-spacing:.8px;
-}
-
-/* TIMELINE */
-
-.timeline-card {
-  padding:17px 13px;
-  overflow:hidden;
+  margin-bottom:15px;
 }
 
 .timeline {
@@ -319,7 +308,7 @@ button:disabled {
   font-weight:700;
 }
 
-/* COMPACT CURRENT STATUS */
+/* CURRENT STATUS */
 
 .current-status {
   display:flex;
@@ -330,7 +319,7 @@ button:disabled {
   border-left:4px solid var(--gold);
   border-radius:8px;
   padding:11px 13px;
-  margin-bottom:11px;
+  margin-bottom:9px;
 }
 
 .status-indicator {
@@ -376,12 +365,12 @@ button:disabled {
   background:var(--red);
 }
 
-.current-status.correction {
-  border-left-color:var(--gold);
-}
-
 .current-status.review {
   border-left-color:var(--green);
+}
+
+.current-status.review .status-indicator {
+  background:var(--green);
 }
 
 .current-status.scheduled {
@@ -392,91 +381,24 @@ button:disabled {
   background:var(--green);
 }
 
-/* SUBMISSION INFORMATION */
-
-.info-grid {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
-
-.info-item {
-  min-width:0;
-}
-
-.info-value {
-  font-size:13px;
-  font-weight:650;
-  color:var(--text);
-  margin-top:3px;
-  overflow-wrap:anywhere;
-}
-
-.author {
-  font-family:Georgia,serif;
-  color:var(--wine);
-  font-size:19px;
-  font-weight:500;
-}
-
-.manuscript-title {
-  font-family:Georgia,serif;
-  font-size:16px;
-  font-weight:500;
-}
-
-.info-divider {
-  border-top:1px solid var(--line);
-  margin:12px 0;
-}
-
-/* ACKNOWLEDGEMENT */
-
-.ack-row {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-}
-
-.ack-badge {
-  display:inline-block;
-  padding:4px 9px;
-  background:#E5F4EA;
-  color:#137947;
-  border-radius:20px;
-  font-size:10px;
-  font-weight:800;
-}
-
-.ack-badge.failed {
-  background:#FFF0EF;
-  color:#A12F29;
-}
-
-.ack-date {
-  font-size:11px;
-  color:var(--muted);
-  text-align:right;
-}
-
-/* OPTIONAL EDITORIAL REMARK */
+/* EDITORIAL REMARK */
 
 .remark {
   display:none;
   background:#FFF9ED;
   border:1px solid #E9D4AA;
   border-left:4px solid var(--gold);
-  border-radius:9px;
-  padding:13px 15px;
+  border-radius:8px;
+  padding:12px 14px;
   margin-bottom:11px;
 }
 
 .remark h3 {
   color:var(--wine);
-  font-size:11px;
-  letter-spacing:.5px;
-  margin-bottom:7px;
+  font-size:10px;
+  font-weight:850;
+  letter-spacing:.6px;
+  margin-bottom:6px;
 }
 
 .remark p {
@@ -489,7 +411,56 @@ button:disabled {
 .remark-date {
   font-size:9px;
   color:var(--muted);
+  margin-top:7px;
+}
+
+/* COMPACT SUBMISSION REFERENCE */
+
+.reference {
+  background:white;
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:11px 13px;
+  margin-top:3px;
+}
+
+.reference-heading {
+  font-size:9px;
+  color:var(--muted);
+  font-weight:850;
+  letter-spacing:.8px;
+  margin-bottom:8px;
+}
+
+.reference-main {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+}
+
+.reference-item {
+  min-width:0;
+}
+
+.reference-label {
+  font-size:8px;
+  color:var(--muted);
+  font-weight:800;
+  letter-spacing:.6px;
+}
+
+.reference-value {
+  font-size:11px;
+  font-weight:650;
+  color:var(--text);
+  margin-top:2px;
+  overflow-wrap:anywhere;
+}
+
+.reference-title {
+  border-top:1px solid var(--line);
   margin-top:8px;
+  padding-top:7px;
 }
 
 /* FOOTER */
@@ -498,7 +469,7 @@ button:disabled {
   text-align:center;
   background:var(--wine);
   color:#DCCACA;
-  padding:17px 12px;
+  padding:16px 12px;
   font-size:10px;
 }
 
@@ -516,7 +487,7 @@ button:disabled {
 @media(max-width:480px) {
 
   main {
-    padding:17px 10px 24px;
+    padding:17px 10px 22px;
   }
 
   .intro h2 {
@@ -563,10 +534,6 @@ button:disabled {
 
   .status-updated {
     white-space:normal;
-  }
-
-  .info-grid {
-    grid-template-columns:1fr;
   }
 
 }
@@ -623,7 +590,7 @@ button:disabled {
 
   <section id="results">
 
-    <!-- EDITORIAL TIMELINE -->
+    <!-- 1. COMPLETE TIMELINE -->
 
     <section class="card timeline-card">
 
@@ -665,13 +632,14 @@ button:disabled {
 
     </section>
 
-    <!-- CURRENT STATUS DIRECTLY BELOW TIMELINE -->
+    <!-- 2. CURRENT STATUS -->
 
     <section class="current-status" id="currentStatusPanel">
 
       <div class="status-indicator"></div>
 
       <div class="status-content">
+
         <div class="status-label">
           CURRENT EDITORIAL STATUS
         </div>
@@ -679,6 +647,7 @@ button:disabled {
         <div class="status-name" id="currentStatus">
           —
         </div>
+
       </div>
 
       <div class="status-updated">
@@ -688,73 +657,7 @@ button:disabled {
 
     </section>
 
-    <!-- SUBMISSION INFORMATION -->
-
-    <section class="card">
-
-      <div class="card-heading">
-        SUBMISSION INFORMATION
-      </div>
-
-      <div class="info-item">
-        <div class="mini-label">AUTHOR NAME</div>
-        <div class="info-value author" id="authorName">—</div>
-      </div>
-
-      <div style="margin-top:11px" class="info-item">
-        <div class="mini-label">MANUSCRIPT TITLE</div>
-        <div class="info-value manuscript-title" id="manuscriptTitle">—</div>
-      </div>
-
-      <div class="info-divider"></div>
-
-      <div class="info-grid">
-
-        <div class="info-item">
-          <div class="mini-label">SUBMISSION ID</div>
-          <div class="info-value" id="resultId">—</div>
-        </div>
-
-        <div class="info-item">
-          <div class="mini-label">SUBMITTED AT</div>
-          <div class="info-value" id="submittedAt">—</div>
-        </div>
-
-      </div>
-
-    </section>
-
-    <!-- ACKNOWLEDGEMENT -->
-
-    <section class="card">
-
-      <div class="card-heading">
-        ACKNOWLEDGEMENT INFORMATION
-      </div>
-
-      <div class="ack-row">
-
-        <div>
-          <div class="mini-label">EMAIL STATUS</div>
-
-          <div style="margin-top:6px">
-            <span class="ack-badge" id="ackStatus">—</span>
-          </div>
-        </div>
-
-        <div>
-          <div class="mini-label" style="text-align:right">
-            SENT AT
-          </div>
-
-          <div class="ack-date" id="ackDate">—</div>
-        </div>
-
-      </div>
-
-    </section>
-
-    <!-- OPTIONAL EDITORIAL REMARK AT THE VERY END -->
+    <!-- 3. REMARK IMMEDIATELY BELOW STATUS -->
 
     <section class="remark" id="remarkSection">
 
@@ -764,6 +667,35 @@ button:disabled {
 
       <div class="remark-date">
         Decision date: <span id="remarkDate">—</span>
+      </div>
+
+    </section>
+
+    <!-- 4. COMPACT SUBMISSION REFERENCE -->
+
+    <section class="reference">
+
+      <div class="reference-heading">
+        SUBMISSION REFERENCE
+      </div>
+
+      <div class="reference-main">
+
+        <div class="reference-item">
+          <div class="reference-label">SUBMISSION ID</div>
+          <div class="reference-value" id="resultId">—</div>
+        </div>
+
+        <div class="reference-item">
+          <div class="reference-label">SUBMITTED AT</div>
+          <div class="reference-value" id="submittedAt">—</div>
+        </div>
+
+      </div>
+
+      <div class="reference-item reference-title">
+        <div class="reference-label">AUTHOR · MANUSCRIPT</div>
+        <div class="reference-value" id="authorTitle">—</div>
       </div>
 
     </section>
@@ -1054,7 +986,6 @@ function renderTimeline(data) {
     const time = stage.querySelector(".stage-time");
 
     stage.className = "stage";
-
     stage.style.display = "";
 
 
@@ -1077,6 +1008,11 @@ function renderTimeline(data) {
     }
 
 
+    /*
+     * Preserve an earlier Correction Requested
+     * milestone after resubmission.
+     */
+
     if (
       key === "decision" &&
       decisionLabel === "Correction Requested" &&
@@ -1093,6 +1029,10 @@ function renderTimeline(data) {
       ? formatDate(times[key])
       : "—";
 
+
+    /*
+     * Rejected submissions terminate at Rejected.
+     */
 
     if (
       status === "rejected" &&
@@ -1113,7 +1053,7 @@ function renderTimeline(data) {
 
 
 /* ============================================================
-   CURRENT STATUS PANEL
+   CURRENT STATUS
    ============================================================ */
 
 function renderCurrentStatus(data) {
@@ -1140,7 +1080,7 @@ function renderCurrentStatus(data) {
 
 
 /* ============================================================
-   OPTIONAL EDITORIAL REMARK
+   OPTIONAL REMARK
    ============================================================ */
 
 function renderRemark(data) {
@@ -1168,10 +1108,7 @@ function renderRemark(data) {
 
   section.style.display = "block";
 
-  text(
-    "remarkText",
-    remark
-  );
+  text("remarkText", remark);
 
   text(
     "remarkDate",
@@ -1191,43 +1128,38 @@ function render(data) {
 
   renderCurrentStatus(data);
 
-  text("authorName", data.authorName);
+  renderRemark(data);
 
-  text("manuscriptTitle", data.manuscriptTitle);
-
-  text("resultId", data.submissionId);
+  text(
+    "resultId",
+    data.submissionId
+  );
 
   text(
     "submittedAt",
     formatDate(data.submittedAt)
   );
 
+  const author = String(
+    data.authorName || ""
+  ).trim();
 
-  const ack = String(
-    data.acknowledgementStatus || "Not available"
-  );
+  const title = String(
+    data.manuscriptTitle || ""
+  ).trim();
 
-  const badge = document.getElementById(
-    "ackStatus"
-  );
+  let reference = author;
 
-  badge.textContent = ack;
-
-  badge.className = "ack-badge";
-
-  if (/failed|not sent|uncertain/i.test(ack)) {
-
-    badge.classList.add("failed");
-
+  if (author && title) {
+    reference += " · ";
   }
 
+  reference += title;
+
   text(
-    "ackDate",
-    formatDate(data.acknowledgementSentAt)
+    "authorTitle",
+    reference
   );
-
-
-  renderRemark(data);
 
   results.style.display = "block";
 
