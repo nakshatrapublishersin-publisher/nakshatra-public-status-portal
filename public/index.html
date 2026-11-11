@@ -299,7 +299,20 @@ button:disabled {
   color:#B7B0AA;
 }
 
-/* CURRENT STATUS - DIRECTLY BELOW TIMELINE */
+.post-note {
+  display:none;
+  margin-top:17px;
+  padding:11px;
+  text-align:center;
+  background:#F2F8F3;
+  border:1px solid #CFE5D4;
+  color:#17663E;
+  border-radius:8px;
+  font-size:12px;
+  font-weight:700;
+}
+
+/* CURRENT STATUS */
 
 .status-panel {
   background:var(--wine);
@@ -399,21 +412,6 @@ button:disabled {
   margin-top:10px;
 }
 
-/* POST SCHEDULED MESSAGE */
-
-.post-note {
-  display:none;
-  margin-top:14px;
-  padding:11px;
-  text-align:center;
-  background:#F2F8F3;
-  border:1px solid #CFE5D4;
-  color:#17663E;
-  border-radius:8px;
-  font-size:12px;
-  font-weight:700;
-}
-
 /* ACKNOWLEDGEMENT */
 
 .ack-row {
@@ -466,6 +464,7 @@ button:disabled {
 /* MOBILE */
 
 @media(max-width:480px) {
+
   main {
     padding:25px 12px 35px;
   }
@@ -507,7 +506,9 @@ button:disabled {
   .status-name {
     font-size:24px;
   }
+
 }
+
 </style>
 </head>
 
@@ -531,14 +532,14 @@ button:disabled {
     <p>আপনার পাণ্ডুলিপির বর্তমান অবস্থান জানুন।</p>
   </section>
 
-  <!-- SEARCH -->
-
   <section class="search-card">
+
     <label class="label" for="submissionId">
       ENTER YOUR SUBMISSION ID
     </label>
 
     <form id="searchForm" class="search-row">
+
       <input
         id="submissionId"
         placeholder="NAK-2026-XXXXX"
@@ -550,16 +551,16 @@ button:disabled {
       <button id="searchButton">
         CHECK STATUS →
       </button>
+
     </form>
 
     <div id="message" role="alert"></div>
-  </section>
 
-  <!-- RESULTS -->
+  </section>
 
   <section id="results">
 
-    <!-- 1. EDITORIAL PROGRESS -->
+    <!-- EDITORIAL TIMELINE -->
 
     <section class="card timeline-card">
 
@@ -599,7 +600,7 @@ button:disabled {
 
     </section>
 
-    <!-- 2. CURRENT STATUS -->
+    <!-- CURRENT STATUS -->
 
     <section class="status-panel">
 
@@ -615,7 +616,7 @@ button:disabled {
 
     </section>
 
-    <!-- 3. SUBMISSION INFORMATION -->
+    <!-- SUBMISSION INFORMATION -->
 
     <section class="card">
 
@@ -643,7 +644,7 @@ button:disabled {
 
     </section>
 
-    <!-- 4. EDITORIAL REMARK -->
+    <!-- EDITORIAL REMARK -->
 
     <section class="remark" id="remarkSection">
 
@@ -657,7 +658,7 @@ button:disabled {
 
     </section>
 
-    <!-- 5. ACKNOWLEDGEMENT -->
+    <!-- ACKNOWLEDGEMENT -->
 
     <section class="card">
 
@@ -675,7 +676,9 @@ button:disabled {
         </div>
 
         <div>
-          <div class="mini-label" style="text-align:right">SENT AT</div>
+          <div class="mini-label" style="text-align:right">
+            SENT AT
+          </div>
           <div class="ack-date" id="ackDate">—</div>
         </div>
 
@@ -694,61 +697,125 @@ button:disabled {
 </footer>
 
 <script>
+
+/* ============================================================
+   BASIC HELPERS
+   ============================================================ */
+
 const form = document.getElementById("searchForm");
+
 const input = document.getElementById("submissionId");
+
 const button = document.getElementById("searchButton");
+
 const message = document.getElementById("message");
+
 const results = document.getElementById("results");
 
+
 function text(id, value) {
-  document.getElementById(id).textContent = value || "—";
+
+  document.getElementById(id).textContent =
+    value || "—";
+
 }
 
+
 function formatDate(value) {
+
   if (!value) return "—";
 
   const date = new Date(value);
 
-  if (isNaN(date.getTime())) return String(value);
+  if (isNaN(date.getTime())) {
+    return String(value);
+  }
 
   return new Intl.DateTimeFormat("en-IN", {
+
     day:"2-digit",
+
     month:"short",
+
     year:"numeric",
+
     hour:"2-digit",
+
     minute:"2-digit",
+
     hour12:true
+
   }).format(date);
+
 }
+
 
 function showError(value) {
+
   message.className = "error";
+
   message.textContent = value;
+
 }
+
+
+/* ============================================================
+   STATUS NORMALISATION
+   ============================================================ */
+
+function normaliseStatus(value) {
+
+  return String(value || "")
+    .trim()
+    .toLowerCase();
+
+}
+
 
 function statusType(value) {
-  const s = String(value || "").toLowerCase();
 
-  if (s.includes("post scheduled")) return "scheduled";
-  if (s.includes("reject")) return "rejected";
+  const status = normaliseStatus(value);
+
+  if (status === "post scheduled") {
+    return "scheduled";
+  }
+
+  if (status === "rejected") {
+    return "rejected";
+  }
+
+  if (status === "correction requested") {
+    return "correction";
+  }
 
   if (
-    s.includes("correction") ||
-    s.includes("revision")
-  ) return "correction";
+    status === "approved" ||
+    status === "accepted"
+  ) {
+    return "accepted";
+  }
 
-  if (
-    s.includes("approved") ||
-    s.includes("accepted")
-  ) return "accepted";
+  if (status === "under review") {
+    return "review";
+  }
 
-  if (s.includes("under review")) return "review";
+  if (status === "resubmitted") {
+    return "resubmitted";
+  }
 
   return "submitted";
+
 }
 
+
+/* ============================================================
+   STATUS DESCRIPTIONS
+   ============================================================ */
+
 function statusDescription(status) {
+
   const descriptions = {
+
     submitted:
       "আপনার পাণ্ডুলিপিটি সফলভাবে জমা হয়েছে। পরবর্তী সম্পাদকীয় প্রক্রিয়ার জন্য অপেক্ষা করুন।",
 
@@ -765,191 +832,610 @@ function statusDescription(status) {
       "আপনার পাণ্ডুলিপিতে কিছু সংশোধন প্রয়োজন। সম্পাদকীয় মন্তব্য অনুসরণ করে প্রয়োজনীয় সংশোধন করুন।",
 
     scheduled:
-      "আপনার পাণ্ডুলিপিটি প্রকাশের জন্য নির্ধারিত হয়েছে। প্রকাশের প্রস্তুতি চলছে।"
+      "আপনার পাণ্ডুলিপিটি প্রকাশের জন্য নির্ধারিত হয়েছে। প্রকাশের প্রস্তুতি চলছে।",
+
+    resubmitted:
+      "আপনার সংশোধিত পাণ্ডুলিপিটি পুনরায় জমা হয়েছে। সম্পাদকীয় পর্যালোচনা পুনরায় শুরু হবে।"
+
   };
 
   return descriptions[status] || "";
+
 }
 
-function renderTimeline(data) {
 
-  const stages = [
-    document.querySelector('[data-stage="submitted"]'),
-    document.querySelector('[data-stage="review"]'),
-    document.querySelector('[data-stage="decision"]'),
-    document.querySelector('[data-stage="scheduled"]')
-  ];
+/* ============================================================
+   HISTORY HELPERS
+   ============================================================ */
 
-  const status = statusType(data.currentStatus);
+/*
+ * Finds the latest event for a particular status.
+ *
+ * API history structure:
+ *
+ * {
+ *   previousStatus: "Submitted",
+ *   status: "Under Review",
+ *   timestamp: "2026-11-11T14:00:00"
+ * }
+ *
+ * Only actual history timestamps are used.
+ */
 
-  const decisionLabel = {
-    accepted:"Accepted",
-    rejected:"Rejected",
-    correction:"Correction Requested",
-    scheduled:"Accepted"
-  };
+function getLatestHistoryEvent(history, targetStatus) {
 
-  const currentIndex = {
-    submitted:0,
-    review:1,
-    accepted:2,
-    rejected:2,
-    correction:2,
-    scheduled:3
-  }[status];
+  if (!Array.isArray(history)) {
+    return null;
+  }
 
-  const timestamps = [
-    data.submittedAt || "",
-    "",
-    data.decisionDate || "",
-    ""
-  ];
+  const target = normaliseStatus(targetStatus);
 
-  stages[2].querySelector(".stage-name").textContent =
-    decisionLabel[status] || "Editorial Decision";
+  const matches = history.filter(function(event) {
 
-  stages.forEach((stage, index) => {
-
-    stage.className = "stage";
-
-    const time = stage.querySelector(".stage-time");
-
-    if (index < currentIndex) {
-      stage.classList.add("completed");
-
-    } else if (index === currentIndex) {
-
-      stage.classList.add(
-        status === "rejected" ? "rejected" : "current"
-      );
-
-    } else {
-      stage.classList.add("pending");
-    }
-
-    if (status === "rejected" && index === 3) {
-      stage.style.display = "none";
-    } else {
-      stage.style.display = "";
-    }
-
-    time.textContent = timestamps[index]
-      ? formatDate(timestamps[index])
-      : (
-          index > currentIndex
-            ? "Awaiting"
-            : "Date unavailable"
-        );
+    return normaliseStatus(event.status) === target;
 
   });
 
-  document.getElementById("postNote").style.display =
-    status === "scheduled" ? "block" : "none";
+  if (!matches.length) {
+    return null;
+  }
+
+  return matches[matches.length - 1];
+
 }
 
-function render(data) {
+
+function getFirstHistoryEvent(history, targetStatus) {
+
+  if (!Array.isArray(history)) {
+    return null;
+  }
+
+  const target = normaliseStatus(targetStatus);
+
+  return history.find(function(event) {
+
+    return normaliseStatus(event.status) === target;
+
+  }) || null;
+
+}
+
+
+function historyTimestamp(history, targetStatus, useLatest) {
+
+  const event = useLatest
+    ? getLatestHistoryEvent(history, targetStatus)
+    : getFirstHistoryEvent(history, targetStatus);
+
+  return event && event.timestamp
+    ? event.timestamp
+    : "";
+
+}
+
+
+/* ============================================================
+   TIMELINE RENDERING
+   ============================================================ */
+
+function renderTimeline(data) {
+
+  const history = Array.isArray(data.statusHistory)
+    ? data.statusHistory
+    : [];
 
   const status = statusType(data.currentStatus);
 
-  text("currentStatus", data.currentStatus);
+  const stages = {
+
+    submitted: document.querySelector(
+      '[data-stage="submitted"]'
+    ),
+
+    review: document.querySelector(
+      '[data-stage="review"]'
+    ),
+
+    decision: document.querySelector(
+      '[data-stage="decision"]'
+    ),
+
+    scheduled: document.querySelector(
+      '[data-stage="scheduled"]'
+    )
+
+  };
+
+
+  /*
+   * ACTUAL TIMESTAMPS FROM STATUS HISTORY
+   */
+
+  const submittedTime =
+    historyTimestamp(history, "Submitted", false) ||
+    data.submittedAt ||
+    "";
+
+  /*
+   * Use the latest Under Review event.
+   * This also handles Correction Requested →
+   * Resubmitted → Under Review.
+   */
+
+  const reviewTime =
+    historyTimestamp(history, "Under Review", true);
+
+  /*
+   * Decision events.
+   *
+   * Correction Requested is retained in history
+   * even after a later resubmission.
+   */
+
+  const acceptedEvent =
+    getLatestHistoryEvent(history, "Approved") ||
+    getLatestHistoryEvent(history, "Accepted");
+
+  const rejectedEvent =
+    getLatestHistoryEvent(history, "Rejected");
+
+  const correctionEvent =
+    getLatestHistoryEvent(history, "Correction Requested");
+
+  let decisionEvent = null;
+
+  let decisionLabel = "Editorial Decision";
+
+  if (status === "rejected") {
+
+    decisionEvent = rejectedEvent;
+    decisionLabel = "Rejected";
+
+  } else if (status === "correction") {
+
+    decisionEvent = correctionEvent;
+    decisionLabel = "Correction Requested";
+
+  } else if (status === "accepted" || status === "scheduled") {
+
+    decisionEvent = acceptedEvent;
+    decisionLabel = "Accepted";
+
+  } else if (status === "review" || status === "resubmitted") {
+
+    /*
+     * If a previous correction was requested,
+     * preserve that milestone visibly.
+     */
+
+    if (correctionEvent) {
+
+      decisionEvent = correctionEvent;
+
+      decisionLabel = "Correction Requested";
+
+    }
+
+  }
+
+  /*
+   * Post Scheduled timestamp.
+   */
+
+  const scheduledTime =
+    historyTimestamp(history, "Post Scheduled", true);
+
+
+  /*
+   * Fallback for decision date only.
+   *
+   * This is not used for Under Review or
+   * Post Scheduled, because those require
+   * their actual history events.
+   */
+
+  const decisionTime =
+    decisionEvent && decisionEvent.timestamp
+      ? decisionEvent.timestamp
+      : (
+          status === "accepted" ||
+          status === "rejected" ||
+          status === "correction"
+            ? data.decisionDate || ""
+            : ""
+        );
+
+
+  /*
+   * Stage labels.
+   */
+
+  stages.decision.querySelector(
+    ".stage-name"
+  ).textContent = decisionLabel;
+
+
+  /*
+   * Timeline timestamps.
+   */
+
+  const times = {
+
+    submitted: submittedTime,
+
+    review: reviewTime,
+
+    decision: decisionTime,
+
+    scheduled: scheduledTime
+
+  };
+
+
+  /*
+   * Reset all stage classes.
+   */
+
+  Object.values(stages).forEach(function(stage) {
+
+    stage.className = "stage";
+
+    stage.style.display = "";
+
+  });
+
+
+  /*
+   * Normal progression.
+   */
+
+  const order = [
+    "submitted",
+    "review",
+    "decision",
+    "scheduled"
+  ];
+
+  let currentIndex = 0;
+
+  if (status === "submitted") {
+    currentIndex = 0;
+  }
+
+  if (status === "review" || status === "resubmitted") {
+    currentIndex = 1;
+  }
+
+  if (
+    status === "accepted" ||
+    status === "rejected" ||
+    status === "correction"
+  ) {
+    currentIndex = 2;
+  }
+
+  if (status === "scheduled") {
+    currentIndex = 3;
+  }
+
+
+  /*
+   * Render each stage.
+   */
+
+  order.forEach(function(key, index) {
+
+    const stage = stages[key];
+
+    const time = stage.querySelector(
+      ".stage-time"
+    );
+
+    const hasTimestamp = Boolean(times[key]);
+
+    /*
+     * Completed stages.
+     */
+
+    if (index < currentIndex) {
+
+      stage.classList.add("completed");
+
+    }
+
+    /*
+     * Current stage.
+     */
+
+    else if (index === currentIndex) {
+
+      if (status === "rejected" && key === "decision") {
+
+        stage.classList.add("rejected");
+
+      } else {
+
+        stage.classList.add("current");
+
+      }
+
+    }
+
+    /*
+     * Future stages.
+     */
+
+    else {
+
+      stage.classList.add("pending");
+
+    }
+
+
+    /*
+     * Preserve previous correction event
+     * after resubmission.
+     */
+
+    if (
+      key === "decision" &&
+      decisionEvent &&
+      decisionLabel === "Correction Requested" &&
+      (status === "review" || status === "resubmitted")
+    ) {
+
+      stage.classList.remove("pending");
+
+      stage.classList.add("completed");
+
+    }
+
+
+    /*
+     * Actual timestamp display.
+     */
+
+    time.textContent = hasTimestamp
+      ? formatDate(times[key])
+      : "—";
+
+
+    /*
+     * Rejected submissions terminate
+     * the timeline before Post Scheduled.
+     */
+
+    if (
+      status === "rejected" &&
+      key === "scheduled"
+    ) {
+
+      stage.style.display = "none";
+
+    }
+
+  });
+
+
+  /*
+   * Publication message.
+   */
+
+  document.getElementById("postNote").style.display =
+    status === "scheduled"
+      ? "block"
+      : "none";
+
+}
+
+
+/* ============================================================
+   RENDER COMPLETE SUBMISSION
+   ============================================================ */
+
+function render(data) {
+
+  const status = statusType(
+    data.currentStatus
+  );
+
+
+  /*
+   * CURRENT STATUS PANEL
+   */
+
+  text(
+    "currentStatus",
+    data.currentStatus
+  );
 
   text(
     "statusDescription",
     statusDescription(status)
   );
 
-  text("updatedAt", formatDate(data.updatedAt));
+  text(
+    "updatedAt",
+    formatDate(data.updatedAt)
+  );
+
+
+  /*
+   * TIMELINE
+   */
 
   renderTimeline(data);
 
-  text("authorName", data.authorName);
-  text("manuscriptTitle", data.manuscriptTitle);
-  text("resultId", data.submissionId);
-  text("submittedAt", formatDate(data.submittedAt));
 
-  const remark = document.getElementById("remarkSection");
+  /*
+   * SUBMISSION INFORMATION
+   */
+
+  text(
+    "authorName",
+    data.authorName
+  );
+
+  text(
+    "manuscriptTitle",
+    data.manuscriptTitle
+  );
+
+  text(
+    "resultId",
+    data.submissionId
+  );
+
+  text(
+    "submittedAt",
+    formatDate(data.submittedAt)
+  );
+
+
+  /*
+   * EDITORIAL REMARK
+   */
+
+  const remark = document.getElementById(
+    "remarkSection"
+  );
 
   if (
     data.editorialRemark &&
-    (status === "rejected" || status === "correction")
+    (
+      status === "rejected" ||
+      status === "correction"
+    )
   ) {
 
     remark.style.display = "block";
 
-    text("remarkText", data.editorialRemark);
+    text(
+      "remarkText",
+      data.editorialRemark
+    );
 
     text(
       "remarkDate",
-      formatDate(data.decisionDate || data.updatedAt)
+      formatDate(
+        data.decisionDate || data.updatedAt
+      )
     );
 
   } else {
+
     remark.style.display = "none";
+
   }
+
+
+  /*
+   * ACKNOWLEDGEMENT
+   */
 
   const ack = String(
     data.acknowledgementStatus || "Not available"
   );
 
-  const badge = document.getElementById("ackStatus");
+  const badge = document.getElementById(
+    "ackStatus"
+  );
 
   badge.textContent = ack;
+
   badge.className = "ack-badge";
 
   if (/failed|not sent|uncertain/i.test(ack)) {
+
     badge.classList.add("failed");
+
   }
 
-  text("ackDate", formatDate(data.acknowledgementSentAt));
+  text(
+    "ackDate",
+    formatDate(data.acknowledgementSentAt)
+  );
 
-  results.style.display = "block";
 }
+
+
+/* ============================================================
+   SEARCH FORM
+   ============================================================ */
 
 form.addEventListener("submit", async function(event) {
 
   event.preventDefault();
 
-  const submissionId = input.value.trim().toUpperCase();
+  const submissionId = input.value
+    .trim()
+    .toUpperCase();
 
   if (!submissionId) {
-    showError("Please enter your Submission ID.");
+
+    showError(
+      "Please enter your Submission ID."
+    );
+
     return;
+
   }
 
   button.disabled = true;
+
   button.textContent = "CHECKING...";
 
   results.style.display = "none";
 
   message.className = "info";
-  message.textContent = "Retrieving submission information...";
+
+  message.textContent =
+    "Retrieving submission information...";
+
 
   try {
 
-    const response = await fetch("/api/status", {
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json"
-      },
-      body:JSON.stringify({submissionId})
-    });
+    const response = await fetch(
+      "/api/status",
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+          submissionId:submissionId
+        })
+      }
+    );
 
     const result = await response.json();
 
     if (!response.ok || !result.success) {
+
       throw new Error(
         result.message || "Submission not found."
       );
+
     }
 
     if (!result.data) {
-      throw new Error("Invalid response received.");
+
+      throw new Error(
+        "Invalid response received."
+      );
+
     }
 
     render(result.data);
 
     message.className = "";
+
     message.textContent = "";
+
+    results.style.display = "block";
 
     results.scrollIntoView({
       behavior:"smooth",
@@ -961,17 +1447,20 @@ form.addEventListener("submit", async function(event) {
     results.style.display = "none";
 
     showError(
-      error.message || "Unable to retrieve status."
+      error.message ||
+      "Unable to retrieve status."
     );
 
   } finally {
 
     button.disabled = false;
+
     button.textContent = "CHECK STATUS →";
 
   }
 
 });
+
 </script>
 
 </body>
