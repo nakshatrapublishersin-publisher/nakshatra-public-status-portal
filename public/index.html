@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#3E000B">
 <title>Submission Status | Nakshatra Publishers</title>
+
 <style>
 :root {
   --wine:#3E000B;
@@ -19,28 +20,37 @@
   --line:#E8DED2;
   --bg:#F6F2EC;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-body{
+
+* {
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body {
   background:var(--bg);
   color:#302725;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   min-height:100vh;
   line-height:1.5;
 }
-.header{
+
+.header {
   background:var(--wine);
   border-bottom:3px solid var(--gold);
   color:white;
   padding:17px 20px;
 }
-.header-inner{
+
+.header-inner {
   max-width:900px;
   margin:auto;
   display:flex;
   align-items:center;
   gap:13px;
 }
-.logo{
+
+.logo {
   width:43px;
   height:43px;
   border:1px solid var(--gold);
@@ -51,42 +61,58 @@ body{
   font-family:Georgia,serif;
   font-size:27px;
 }
-.brand h1{
+
+.brand h1 {
   font-size:15px;
   letter-spacing:1.4px;
 }
-.brand p{
+
+.brand p {
   font-size:10px;
   color:#DEC9C7;
   letter-spacing:1.4px;
 }
-main{
+
+main {
   max-width:820px;
   margin:auto;
   padding:35px 16px 45px;
 }
-.intro{text-align:center;margin-bottom:24px}
-.eyebrow{
+
+.intro {
+  text-align:center;
+  margin-bottom:24px;
+}
+
+.eyebrow {
   color:var(--gold);
   font-size:10px;
   font-weight:800;
   letter-spacing:2px;
 }
-.intro h2{
+
+.intro h2 {
   font-family:Georgia,serif;
   color:var(--wine);
   font-size:30px;
   margin:6px 0;
 }
-.intro p{font-size:13px;color:var(--muted)}
-.search-card,.card{
+
+.intro p {
+  font-size:13px;
+  color:var(--muted);
+}
+
+.search-card,
+.card {
   background:white;
   border:1px solid var(--line);
   border-radius:12px;
   padding:20px;
   margin-bottom:15px;
 }
-.label{
+
+.label {
   display:block;
   font-size:11px;
   color:var(--wine);
@@ -94,8 +120,13 @@ main{
   letter-spacing:.7px;
   margin-bottom:8px;
 }
-.search-row{display:flex;gap:9px}
-input{
+
+.search-row {
+  display:flex;
+  gap:9px;
+}
+
+input {
   flex:1;
   min-width:0;
   border:1px solid #DCCFC1;
@@ -105,8 +136,12 @@ input{
   text-transform:uppercase;
   outline:none;
 }
-input:focus{border-color:var(--gold)}
-button{
+
+input:focus {
+  border-color:var(--gold);
+}
+
+button {
   border:0;
   border-radius:8px;
   padding:12px 18px;
@@ -116,51 +151,65 @@ button{
   font-weight:800;
   cursor:pointer;
 }
-button:disabled{opacity:.6}
-#message{
+
+button:disabled {
+  opacity:.6;
+}
+
+#message {
   display:none;
   margin-top:12px;
   padding:10px;
   border-radius:7px;
   font-size:12px;
 }
-#message.error{
+
+#message.error {
   display:block;
   background:#FFF0EF;
   color:#A12F29;
 }
-#message.info{
+
+#message.info {
   display:block;
   background:#F0F5FC;
   color:#345D8E;
 }
-#results{display:none}
-.card-heading{
+
+#results {
+  display:none;
+}
+
+.card-heading {
   color:var(--wine);
   font-size:13px;
   font-weight:850;
   letter-spacing:.5px;
-  margin-bottom:16px;
+  margin-bottom:18px;
 }
-.mini-label{
+
+.mini-label {
   color:var(--muted);
   font-size:9px;
   font-weight:800;
   letter-spacing:1px;
 }
-.author{
+
+.author {
   font-family:Georgia,serif;
   color:var(--wine);
   font-size:23px;
   margin:3px 0 12px;
 }
-.title{
+
+.title {
   font-family:Georgia,serif;
   font-size:19px;
   margin-top:3px;
   overflow-wrap:anywhere;
 }
-.details{
+
+.details {
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:15px;
@@ -168,50 +217,67 @@ button:disabled{opacity:.6}
   margin-top:16px;
   padding-top:14px;
 }
-.details strong{
+
+.details strong {
   display:block;
   font-size:12px;
   margin-top:3px;
   overflow-wrap:anywhere;
 }
-.status-panel{
+
+/* CURRENT STATUS */
+
+.status-panel {
   background:var(--wine);
   color:white;
   padding:19px 21px;
   border-radius:12px;
   margin-bottom:15px;
 }
-.status-panel .mini-label{color:#E8C7A0}
-.status-name{
+
+.status-panel .mini-label {
+  color:#E8C7A0;
+}
+
+.status-name {
   font-family:Georgia,serif;
   font-size:24px;
   margin:5px 0;
 }
-.status-description{
+
+.status-description {
   font-size:12px;
   color:#E6D5D4;
 }
-.updated{
+
+.updated {
   font-size:10px;
   color:#D4B7B6;
   margin-top:12px;
 }
-/* HORIZONTAL TIMELINE */
-.timeline-card{
+
+/* EDITORIAL TIMELINE */
+
+.timeline-card {
   overflow:hidden;
+  margin-bottom:15px;
+  border-radius:13px;
 }
-.timeline{
+
+.timeline {
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
   position:relative;
-  padding-top:5px;
+  padding-top:7px;
 }
-.stage{
+
+.stage {
   position:relative;
   min-width:0;
   text-align:center;
 }
-.stage:not(:last-child)::after{
+
+.stage:not(:last-child)::after {
   content:"";
   position:absolute;
   height:3px;
@@ -221,13 +287,24 @@ button:disabled{opacity:.6}
   top:10px;
   z-index:0;
 }
-.stage.completed:not(:last-child)::after{
+
+.stage.completed:not(:last-child)::after {
   background:var(--green);
 }
-.stage.current:not(:last-child)::after{
-  background:linear-gradient(90deg,var(--gold) 0%,#E7E2DC 100%);
+
+.stage.current:not(:last-child)::after {
+  background:linear-gradient(
+    90deg,
+    var(--green) 0%,
+    var(--gold) 100%
+  );
 }
-.stage-dot{
+
+.stage.rejected:not(:last-child)::after {
+  background:var(--red);
+}
+
+.stage-dot {
   position:relative;
   z-index:1;
   width:22px;
@@ -238,37 +315,59 @@ button:disabled{opacity:.6}
   box-shadow:0 0 0 1px #D9D5D0;
   margin:0 auto 9px;
 }
-.stage.completed .stage-dot{
+
+.stage.completed .stage-dot {
   background:var(--green);
   box-shadow:0 0 0 1px var(--green);
 }
-.stage.current .stage-dot{
+
+.stage.current .stage-dot {
   background:var(--gold);
   box-shadow:0 0 0 3px #DF892133;
 }
-.stage.rejected .stage-dot{
+
+.stage.rejected .stage-dot {
   background:var(--red);
   box-shadow:0 0 0 1px var(--red);
 }
-.stage-name{
+
+.stage-name {
   font-size:11px;
   font-weight:800;
   line-height:1.3;
   padding:0 3px;
 }
-.stage.completed .stage-name{color:var(--green)}
-.stage.current .stage-name{color:var(--wine)}
-.stage.rejected .stage-name{color:var(--red)}
-.stage.pending .stage-name{color:#A7A09A}
-.stage-time{
+
+.stage.completed .stage-name {
+  color:var(--green);
+}
+
+.stage.current .stage-name {
+  color:var(--wine);
+}
+
+.stage.rejected .stage-name {
+  color:var(--red);
+}
+
+.stage.pending .stage-name {
+  color:#A7A09A;
+}
+
+.stage-time {
   font-size:9px;
   color:var(--muted);
   line-height:1.4;
   margin-top:7px;
   min-height:27px;
+  overflow-wrap:anywhere;
 }
-.stage.pending .stage-time{color:#B7B0AA}
-.post-note{
+
+.stage.pending .stage-time {
+  color:#B7B0AA;
+}
+
+.post-note {
   display:none;
   margin-top:15px;
   padding:10px;
@@ -280,7 +379,10 @@ button:disabled{opacity:.6}
   font-size:12px;
   font-weight:700;
 }
-.remark{
+
+/* EDITORIAL REMARK */
+
+.remark {
   display:none;
   background:#FFF9ED;
   border:1px solid #E9D4AA;
@@ -289,28 +391,35 @@ button:disabled{opacity:.6}
   padding:17px;
   margin-bottom:15px;
 }
-.remark h3{
+
+.remark h3 {
   color:var(--wine);
   font-size:13px;
   margin-bottom:9px;
 }
-.remark p{
+
+.remark p {
   font-size:13px;
   white-space:pre-wrap;
   overflow-wrap:anywhere;
 }
-.remark-date{
+
+.remark-date {
   font-size:10px;
   color:var(--muted);
   margin-top:10px;
 }
-.ack-row{
+
+/* ACKNOWLEDGEMENT */
+
+.ack-row {
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:12px;
 }
-.ack-badge{
+
+.ack-badge {
   display:inline-block;
   padding:5px 10px;
   background:#E5F4EA;
@@ -319,38 +428,83 @@ button:disabled{opacity:.6}
   font-size:10px;
   font-weight:800;
 }
-.ack-badge.failed{
+
+.ack-badge.failed {
   background:#FFF0EF;
   color:#A12F29;
 }
-.ack-date{
+
+.ack-date {
   font-size:11px;
   text-align:right;
   color:var(--muted);
 }
-.footer{
+
+/* FOOTER */
+
+.footer {
   text-align:center;
   background:var(--wine);
   color:#DCCACA;
   padding:22px 15px;
   font-size:11px;
 }
-.footer strong{color:white;letter-spacing:1px}
-.footer p{margin-top:4px}
-@media(max-width:480px){
-  main{padding:27px 12px 35px}
-  .intro h2{font-size:27px}
-  .search-card,.card{padding:16px}
-  .search-row{flex-direction:column}
-  button{width:100%}
-  .stage-name{font-size:9px}
-  .stage-time{font-size:8px}
-  .stage-dot{width:19px;height:19px}
-  .status-name{font-size:22px}
+
+.footer strong {
+  color:white;
+  letter-spacing:1px;
+}
+
+.footer p {
+  margin-top:4px;
+}
+
+/* MOBILE */
+
+@media(max-width:480px) {
+  main {
+    padding:27px 12px 35px;
+  }
+
+  .intro h2 {
+    font-size:27px;
+  }
+
+  .search-card,
+  .card {
+    padding:16px;
+  }
+
+  .search-row {
+    flex-direction:column;
+  }
+
+  button {
+    width:100%;
+  }
+
+  .stage-name {
+    font-size:9px;
+  }
+
+  .stage-time {
+    font-size:8px;
+  }
+
+  .stage-dot {
+    width:19px;
+    height:19px;
+  }
+
+  .status-name {
+    font-size:22px;
+  }
 }
 </style>
 </head>
+
 <body>
+
 <header class="header">
   <div class="header-inner">
     <div class="logo">ন</div>
@@ -360,123 +514,206 @@ button:disabled{opacity:.6}
     </div>
   </div>
 </header>
+
 <main>
+
   <section class="intro">
     <div class="eyebrow">EDITORIAL TRANSPARENCY</div>
     <h2>Submission Status</h2>
     <p>আপনার পাণ্ডুলিপির বর্তমান অবস্থান জানুন।</p>
   </section>
+
+  <!-- SEARCH -->
+
   <section class="search-card">
     <label class="label" for="submissionId">
       ENTER YOUR SUBMISSION ID
     </label>
+
     <form id="searchForm" class="search-row">
-      <input id="submissionId"
+      <input
+        id="submissionId"
         placeholder="NAK-2026-XXXXX"
         maxlength="60"
         autocomplete="off"
-        required>
-      <button id="searchButton">CHECK STATUS →</button>
+        required
+      >
+
+      <button id="searchButton">
+        CHECK STATUS →
+      </button>
     </form>
+
     <div id="message" role="alert"></div>
   </section>
+
+  <!-- RESULTS -->
+
   <section id="results">
-    <section class="card">
-      <div class="card-heading">SUBMISSION INFORMATION</div>
-      <div class="mini-label">AUTHOR NAME</div>
-      <div class="author" id="authorName">—</div>
-      <div class="mini-label">MANUSCRIPT TITLE</div>
-      <div class="title" id="manuscriptTitle">—</div>
-      <div class="details">
-        <div>
-          <div class="mini-label">SUBMISSION ID</div>
-          <strong id="resultId">—</strong>
-        </div>
-        <div>
-          <div class="mini-label">SUBMITTED AT</div>
-          <strong id="submittedAt">—</strong>
-        </div>
-      </div>
-    </section>
-    <section class="status-panel">
-      <div class="mini-label">CURRENT EDITORIAL STATUS</div>
-      <div class="status-name" id="currentStatus">—</div>
-      <div class="status-description" id="statusDescription"></div>
-      <div class="updated">
-        Last updated: <span id="updatedAt">—</span>
-      </div>
-    </section>
+
+    <!-- 1. TIMELINE FIRST -->
+
     <section class="card timeline-card">
-      <div class="card-heading">EDITORIAL PROGRESS</div>
+
+      <div class="card-heading">
+        EDITORIAL PROGRESS
+      </div>
+
       <div class="timeline" id="timeline">
+
         <div class="stage" data-stage="submitted">
           <div class="stage-dot"></div>
           <div class="stage-name">Submitted</div>
           <div class="stage-time">—</div>
         </div>
+
         <div class="stage" data-stage="review">
           <div class="stage-dot"></div>
           <div class="stage-name">Under Review</div>
           <div class="stage-time">—</div>
         </div>
+
         <div class="stage" data-stage="decision">
           <div class="stage-dot"></div>
           <div class="stage-name">Editorial Decision</div>
           <div class="stage-time">—</div>
         </div>
+
         <div class="stage" data-stage="scheduled">
           <div class="stage-dot"></div>
           <div class="stage-name">Post Scheduled</div>
           <div class="stage-time">—</div>
         </div>
+
       </div>
+
       <div class="post-note" id="postNote">
         এই লেখাটি আগামী ৫–১৫ দিনের মধ্যে প্রকাশিত হবে।
       </div>
+
     </section>
+
+    <!-- 2. SUBMISSION INFORMATION -->
+
+    <section class="card">
+
+      <div class="card-heading">
+        SUBMISSION INFORMATION
+      </div>
+
+      <div class="mini-label">AUTHOR NAME</div>
+      <div class="author" id="authorName">—</div>
+
+      <div class="mini-label">MANUSCRIPT TITLE</div>
+      <div class="title" id="manuscriptTitle">—</div>
+
+      <div class="details">
+
+        <div>
+          <div class="mini-label">SUBMISSION ID</div>
+          <strong id="resultId">—</strong>
+        </div>
+
+        <div>
+          <div class="mini-label">SUBMITTED AT</div>
+          <strong id="submittedAt">—</strong>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- 3. CURRENT STATUS -->
+
+    <section class="status-panel">
+
+      <div class="mini-label">
+        CURRENT EDITORIAL STATUS
+      </div>
+
+      <div class="status-name" id="currentStatus">—</div>
+
+      <div class="status-description" id="statusDescription"></div>
+
+      <div class="updated">
+        Last updated: <span id="updatedAt">—</span>
+      </div>
+
+    </section>
+
+    <!-- 4. EDITORIAL REMARK -->
+
     <section class="remark" id="remarkSection">
+
       <h3>✉ EDITORIAL REMARK</h3>
+
       <p id="remarkText"></p>
+
       <div class="remark-date">
         Decision date: <span id="remarkDate">—</span>
       </div>
+
     </section>
+
+    <!-- 5. ACKNOWLEDGEMENT -->
+
     <section class="card">
-      <div class="card-heading">ACKNOWLEDGEMENT INFORMATION</div>
+
+      <div class="card-heading">
+        ACKNOWLEDGEMENT INFORMATION
+      </div>
+
       <div class="ack-row">
+
         <div>
           <div class="mini-label">EMAIL STATUS</div>
           <div style="margin-top:7px">
             <span class="ack-badge" id="ackStatus">—</span>
           </div>
         </div>
+
         <div>
-          <div class="mini-label" style="text-align:right">SENT AT</div>
+          <div class="mini-label" style="text-align:right">
+            SENT AT
+          </div>
           <div class="ack-date" id="ackDate">—</div>
         </div>
+
       </div>
+
     </section>
+
   </section>
+
 </main>
+
 <footer class="footer">
   <strong>NAKSHATRA PUBLISHERS</strong>
   <p>নিয়মিত বিভাগ · Editorial Status Portal</p>
   <p>© 2026 Nakshatra Publishers. All rights reserved.</p>
 </footer>
+
 <script>
 const form = document.getElementById("searchForm");
 const input = document.getElementById("submissionId");
 const button = document.getElementById("searchButton");
 const message = document.getElementById("message");
 const results = document.getElementById("results");
-function text(id,value){
-  document.getElementById(id).textContent=value || "—";
+
+function text(id, value) {
+  document.getElementById(id).textContent = value || "—";
 }
-function formatDate(value){
-  if(!value) return "—";
-  const date=new Date(value);
-  if(isNaN(date.getTime())) return String(value);
-  return new Intl.DateTimeFormat("en-IN",{
+
+function formatDate(value) {
+  if (!value) return "—";
+
+  const date = new Date(value);
+
+  if (isNaN(date.getTime())) {
+    return String(value);
+  }
+
+  return new Intl.DateTimeFormat("en-IN", {
     day:"2-digit",
     month:"short",
     year:"numeric",
@@ -485,34 +722,87 @@ function formatDate(value){
     hour12:true
   }).format(date);
 }
-function showError(value){
-  message.className="error";
-  message.textContent=value;
+
+function showError(value) {
+  message.className = "error";
+  message.textContent = value;
 }
-function statusType(value){
-  const s=String(value||"").toLowerCase();
-  if(s.includes("post scheduled")) return "scheduled";
-  if(s.includes("reject")) return "rejected";
-  if(s.includes("correction") || s.includes("revision")) return "correction";
-  if(s.includes("approved") || s.includes("accepted")) return "accepted";
-  if(s.includes("under review")) return "review";
+
+function statusType(value) {
+  const s = String(value || "").toLowerCase();
+
+  if (s.includes("post scheduled")) return "scheduled";
+  if (s.includes("reject")) return "rejected";
+
+  if (
+    s.includes("correction") ||
+    s.includes("revision")
+  ) return "correction";
+
+  if (
+    s.includes("approved") ||
+    s.includes("accepted")
+  ) return "accepted";
+
+  if (s.includes("under review")) return "review";
+
   return "submitted";
 }
-function renderTimeline(data){
-  const stages=[
+
+/*
+  Read actual event timestamps from statusHistory,
+  if the API supplies them.
+
+  Expected event structure:
+  {
+    status: "Under Review",
+    timestamp: "2026-11-11T..."
+  }
+*/
+
+function getHistoryTimestamp(data, keywords) {
+  const history = Array.isArray(data.statusHistory)
+    ? data.statusHistory
+    : [];
+
+  for (let i = history.length - 1; i >= 0; i--) {
+    const event = history[i];
+
+    const eventStatus = String(
+      event.status || event.newStatus || ""
+    ).toLowerCase();
+
+    if (
+      keywords.some(keyword =>
+        eventStatus.includes(keyword)
+      )
+    ) {
+      return event.timestamp || event.date || event.createdAt || "";
+    }
+  }
+
+  return "";
+}
+
+function renderTimeline(data) {
+
+  const stages = [
     document.querySelector('[data-stage="submitted"]'),
     document.querySelector('[data-stage="review"]'),
     document.querySelector('[data-stage="decision"]'),
     document.querySelector('[data-stage="scheduled"]')
   ];
-  const status=statusType(data.currentStatus);
-  const decisionLabel={
+
+  const status = statusType(data.currentStatus);
+
+  const decisionLabel = {
     accepted:"Accepted",
     rejected:"Rejected",
     correction:"Correction Requested",
     scheduled:"Accepted"
   };
-  const currentIndex={
+
+  const currentIndex = {
     submitted:0,
     review:1,
     accepted:2,
@@ -520,113 +810,195 @@ function renderTimeline(data){
     correction:2,
     scheduled:3
   }[status];
-  const timestamps=[
-    data.submittedAt,
-    status!=="submitted"?data.updatedAt:"",
-    ["accepted","rejected","correction","scheduled"].includes(status)
-      ?(data.decisionDate||data.updatedAt):"",
-    status==="scheduled"?data.updatedAt:""
+
+  const reviewTimestamp = getHistoryTimestamp(
+    data,
+    ["under review"]
+  );
+
+  const decisionTimestamp =
+    getHistoryTimestamp(data, [
+      "approved",
+      "accepted",
+      "rejected",
+      "correction requested"
+    ]) || data.decisionDate || "";
+
+  const scheduledTimestamp = getHistoryTimestamp(
+    data,
+    ["post scheduled"]
+  );
+
+  const timestamps = [
+    data.submittedAt || "",
+    reviewTimestamp,
+    decisionTimestamp,
+    scheduledTimestamp
   ];
-  stages[2].querySelector(".stage-name").textContent=
-    decisionLabel[status]||"Editorial Decision";
-  stages.forEach((stage,index)=>{
-    stage.className="stage";
-    const time=stage.querySelector(".stage-time");
-    if(index<currentIndex){
+
+  stages[2].querySelector(".stage-name").textContent =
+    decisionLabel[status] || "Editorial Decision";
+
+  stages.forEach((stage, index) => {
+
+    stage.className = "stage";
+
+    const time = stage.querySelector(".stage-time");
+
+    if (index < currentIndex) {
       stage.classList.add("completed");
-    }else if(index===currentIndex){
+
+    } else if (index === currentIndex) {
+
       stage.classList.add(
-        status==="rejected"?"rejected":"current"
+        status === "rejected" ? "rejected" : "current"
       );
-    }else{
+
+    } else {
       stage.classList.add("pending");
     }
-    if(status==="rejected" && index===3){
-      stage.style.display="none";
-    }else{
-      stage.style.display="";
+
+    if (status === "rejected" && index === 3) {
+      stage.style.display = "none";
+    } else {
+      stage.style.display = "";
     }
-    time.textContent=timestamps[index]
-      ?formatDate(timestamps[index])
-      :"Awaiting";
+
+    time.textContent = timestamps[index]
+      ? formatDate(timestamps[index])
+      : (
+          index > currentIndex
+            ? "Awaiting"
+            : "Date unavailable"
+        );
+
   });
-  document.getElementById("postNote").style.display=
-    status==="scheduled"?"block":"none";
+
+  document.getElementById("postNote").style.display =
+    status === "scheduled" ? "block" : "none";
 }
-function render(data){
-  text("authorName",data.authorName);
-  text("manuscriptTitle",data.manuscriptTitle);
-  text("resultId",data.submissionId);
-  text("submittedAt",formatDate(data.submittedAt));
-  text("currentStatus",data.currentStatus);
-  text("updatedAt",formatDate(data.updatedAt));
+
+function render(data) {
+
+  text("authorName", data.authorName);
+  text("manuscriptTitle", data.manuscriptTitle);
+  text("resultId", data.submissionId);
+  text("submittedAt", formatDate(data.submittedAt));
+  text("currentStatus", data.currentStatus);
+  text("updatedAt", formatDate(data.updatedAt));
+
   renderTimeline(data);
-  const status=statusType(data.currentStatus);
-  const remark=document.getElementById("remarkSection");
-  if(
+
+  const status = statusType(data.currentStatus);
+
+  const remark = document.getElementById("remarkSection");
+
+  if (
     data.editorialRemark &&
-    (status==="rejected" || status==="correction")
-  ){
-    remark.style.display="block";
-    text("remarkText",data.editorialRemark);
-    text("remarkDate",formatDate(
-      data.decisionDate||data.updatedAt
-    ));
-  }else{
-    remark.style.display="none";
+    (status === "rejected" || status === "correction")
+  ) {
+
+    remark.style.display = "block";
+
+    text("remarkText", data.editorialRemark);
+
+    text(
+      "remarkDate",
+      formatDate(data.decisionDate || data.updatedAt)
+    );
+
+  } else {
+    remark.style.display = "none";
   }
-  const ack=String(data.acknowledgementStatus||"Not available");
-  const badge=document.getElementById("ackStatus");
-  badge.textContent=ack;
-  badge.className="ack-badge";
-  if(
-    /failed|not sent|uncertain/i.test(ack)
-  ){
+
+  const ack = String(
+    data.acknowledgementStatus || "Not available"
+  );
+
+  const badge = document.getElementById("ackStatus");
+
+  badge.textContent = ack;
+  badge.className = "ack-badge";
+
+  if (/failed|not sent|uncertain/i.test(ack)) {
     badge.classList.add("failed");
   }
-  text("ackDate",formatDate(data.acknowledgementSentAt));
-  results.style.display="block";
+
+  text("ackDate", formatDate(data.acknowledgementSentAt));
+
+  results.style.display = "block";
 }
-form.addEventListener("submit",async function(event){
+
+form.addEventListener("submit", async function(event) {
+
   event.preventDefault();
-  const submissionId=input.value.trim().toUpperCase();
-  if(!submissionId){
+
+  const submissionId = input.value.trim().toUpperCase();
+
+  if (!submissionId) {
     showError("Please enter your Submission ID.");
     return;
   }
-  button.disabled=true;
-  button.textContent="CHECKING...";
-  results.style.display="none";
-  message.className="info";
-  message.textContent="Retrieving submission information...";
-  try{
-    const response=await fetch("/api/status",{
+
+  button.disabled = true;
+  button.textContent = "CHECKING...";
+
+  results.style.display = "none";
+
+  message.className = "info";
+  message.textContent = "Retrieving submission information...";
+
+  try {
+
+    const response = await fetch("/api/status", {
       method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({submissionId})
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify({
+        submissionId
+      })
     });
-    const result=await response.json();
-    if(!response.ok || !result.success){
-      throw new Error(result.message||"Submission not found.");
+
+    const result = await response.json();
+
+    if (!response.ok || !result.success) {
+      throw new Error(
+        result.message || "Submission not found."
+      );
     }
-    if(!result.data){
+
+    if (!result.data) {
       throw new Error("Invalid response received.");
     }
+
     render(result.data);
-    message.className="";
-    message.textContent="";
+
+    message.className = "";
+    message.textContent = "";
+
     results.scrollIntoView({
       behavior:"smooth",
       block:"start"
     });
-  }catch(error){
-    results.style.display="none";
-    showError(error.message||"Unable to retrieve status.");
-  }finally{
-    button.disabled=false;
-    button.textContent="CHECK STATUS →";
+
+  } catch (error) {
+
+    results.style.display = "none";
+
+    showError(
+      error.message || "Unable to retrieve status."
+    );
+
+  } finally {
+
+    button.disabled = false;
+    button.textContent = "CHECK STATUS →";
+
   }
+
 });
 </script>
+
 </body>
 </html>
