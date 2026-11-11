@@ -1,0 +1,7 @@
+name = "nakshatra-public-status-portal"
+main = "worker/index.js"
+compatibility_date = "2026-11-11"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
